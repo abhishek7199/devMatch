@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const validator = require("validator")
+// const validator = require("validator")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
     about: {
         type: String,
         default: "This is a default about the user"
+    },
+    photoUrl: {
+        type: String,
+        default: "https://agnportfolio.vercel.app/img/profile-pic.jpg"
     }
 
 
@@ -49,9 +53,10 @@ userSchema.methods.getJWT = async function () {
     const user = this;
 
     const token = await jwt.sign(
+
         { _id: user._id },
         "DEV@Tinder$790", // Secret Key
-        { expiresIn: "1d" }
+        // { expiresIn: "1d" }
     );
 
     return token;
